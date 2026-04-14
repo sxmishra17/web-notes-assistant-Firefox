@@ -1,0 +1,167 @@
+/* ============================================================
+   Web Notes Assistant — Content Script Styles
+   Right-side panel, floating popup, screenshot overlay
+   ============================================================ */
+
+/* --- Right-Side Panel Container --- */
+#wa-panel-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 380px;
+  height: 100vh;
+  z-index: 2147483640;
+  display: flex;
+  flex-direction: row;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -4px 0 30px rgba(0, 0, 0, 0.35);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+#wa-panel-container.wa-panel-visible {
+  transform: translateX(0);
+}
+
+/* --- Resize Handle --- */
+#wa-panel-resize-handle {
+  width: 8px;
+  cursor: ew-resize;
+  background: linear-gradient(180deg, rgba(124, 58, 237, 0.3) 0%, rgba(79, 70, 229, 0.15) 100%);
+  flex-shrink: 0;
+  transition: background 0.2s;
+  position: relative;
+  /* Extend clickable area with invisible padding */
+  margin-left: -4px;
+  padding-left: 4px;
+}
+
+#wa-panel-resize-handle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3px;
+  height: 40px;
+  background: rgba(139, 92, 246, 0.6);
+  border-radius: 3px;
+  transition: background 0.2s, height 0.2s;
+}
+
+#wa-panel-resize-handle:hover {
+  background: linear-gradient(180deg, rgba(124, 58, 237, 0.6) 0%, rgba(79, 70, 229, 0.4) 100%);
+}
+
+#wa-panel-resize-handle:hover::after {
+  background: rgba(167, 139, 250, 0.9);
+  height: 60px;
+}
+
+/* --- Panel Iframe --- */
+#wa-panel-iframe {
+  flex: 1;
+  border: none;
+  width: 100%;
+  height: 100%;
+  background: #0f0d1a;
+}
+
+/* --- Floating Popup --- */
+#wa-popup {
+  position: absolute;
+  z-index: 2147483647;
+  display: flex;
+  gap: 4px;
+  padding: 6px 8px;
+  background: linear-gradient(135deg, #1e1b4b, #312e81);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  border-radius: 12px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(139, 92, 246, 0.2),
+    0 0 20px rgba(124, 58, 237, 0.15);
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  opacity: 0;
+  transform: translateY(8px) scale(0.95);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: auto;
+  backdrop-filter: blur(12px);
+}
+
+#wa-popup.wa-popup-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+#wa-popup button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+#wa-add-text {
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  color: #fff;
+}
+#wa-add-text:hover {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+  transform: translateY(-1px);
+}
+
+#wa-popup button svg {
+  flex-shrink: 0;
+}
+
+/* --- Screenshot Overlay --- */
+#wa-screenshot-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2147483646;
+  cursor: crosshair;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(1px);
+}
+
+#wa-screenshot-instructions {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #1e1b4b, #312e81);
+  color: #c4b5fd;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 12px;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  z-index: 2147483647;
+  letter-spacing: 0.02em;
+}
+
+#wa-selection-rect {
+  position: fixed;
+  display: none;
+  border: 2px solid #8b5cf6;
+  background: rgba(139, 92, 246, 0.12);
+  border-radius: 4px;
+  z-index: 2147483647;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}

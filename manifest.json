@@ -1,0 +1,50 @@
+{
+  "manifest_version": 2,
+  "name": "Web Notes Assistant",
+  "version": "1.2.0",
+  "description": "Highlight text and capture screenshots from any web page into organized, exportable notes. Supports workspaces, dark/light mode, PDF & DOCX export, keep-style code blocks, and cross-tab sync.",
+  "homepage_url": "https://github.com/webAnnotator",
+  "author": "YuvaTech",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png"
+    },
+    "default_title": "Toggle Web Notes Assistant"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": ["icons/*", "sidebar/*", "lib/*"],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "web-notes-assistant@yuvatech.extension",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": ["none"],
+        "optional": []
+      }
+    }
+  }
+}
