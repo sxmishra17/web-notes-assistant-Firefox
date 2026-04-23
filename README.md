@@ -93,4 +93,4 @@ webAnnotator/
 
 ## License
 
-MIT License — free to use, modify, and distribute.
+All Rights Reserved — free to use, modify, and distribute.
