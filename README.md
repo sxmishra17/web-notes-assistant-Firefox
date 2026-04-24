@@ -94,3 +94,7 @@ webAnnotator/
 ## License
 
 All Rights Reserved.
+
+---
+
+Developed by **Satish Mishra**, **Yuvatech Solutions USA, LLC**
